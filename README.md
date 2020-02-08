@@ -4,9 +4,9 @@ blog example](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-drup
 with some modifications to allow bloggers to write articles in commonmark
 markdown format.
 
-[Blog](https://github.com/gatsby-drupal-markdown-starter)
+[Blog](https://errcsool.com/blog/68)
 
-# Drupal Setup
+r Drupal Setup
 After starting Drupal, create a new text format for your markdown blog inputs.
 This should be a plaintext input format. Do not use the `Markdown` filter, as this
 converts markdown input into HTML. 
