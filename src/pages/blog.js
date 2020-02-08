@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout from "../layouts"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 import Button from "../components/button"
@@ -11,15 +11,16 @@ class Blog extends React.Component {
   render() {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
-    const posts = data.allMdx.edges
+    const socialInfo = data.site.siteMetadata.social
+    const posts = data.articles.edges
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={this.props.location} title={`${siteTitle}`} social={socialInfo}>
         <SEO title="All posts" />
         <Bio />
         <div style={{ margin: "20px 0 40px" }}>
           {posts.map(({ node }) => {
-            const title = node.frontmatter.title || node.fields.slug
+            const title = node.title
             return (
               <div key={node.fields.slug}>
                 <h3
@@ -29,15 +30,15 @@ class Blog extends React.Component {
                 >
                   <Link
                     style={{ boxShadow: `none` }}
-                    to={`blog${node.fields.slug}`}
+                    to={`${node.fields.slug}`}
                   >
                     {title}
                   </Link>
                 </h3>
-                <small>{node.frontmatter.date}</small>
+                <small>{node.createdAt}</small>
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.description || node.excerpt,
+                    __html: node.description,
                   }}
                 />
               </div>
@@ -59,19 +60,22 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        social {
+          email
+          github
+        }
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    articles: allArticles(limit: 1000) {
       edges {
         node {
-          excerpt
+          title
+          createdAt(fromNow: true)
+          internal {
+            description
+          }
           fields {
             slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
           }
         }
       }

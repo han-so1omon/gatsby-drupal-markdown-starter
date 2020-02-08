@@ -1,24 +1,44 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
-exports.createPages = ({ graphql, actions }) => {
+// Create a slug for each recipe and set it as a field on the node.
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === `articles`) {
+    const slug = `/blog/${node.internalId}/`
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
+  }
+}
+
+// Implement the Gatsby API “createPages”. This is called once the
+// data layer is bootstrapped to let plugins create pages from data.
+exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const articleTemplate = path.resolve(`src/templates/article.js`)
+  // Query for recipe nodes to use in creating pages.
   return graphql(
     `
       {
-        allMdx(
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
-        ) {
+        site {
+          siteMetadata {
+            title
+            social {
+              email
+              github
+            }
+          }
+        }
+        articles: allArticles {
           edges {
             node {
+              id: internalId
               fields {
                 slug
-              }
-              frontmatter {
-                title
               }
             }
           }
@@ -30,37 +50,17 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-    // Create blog posts pages.
-    const posts = result.data.allMdx.edges
-
-    posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1].node
-      const next = index === 0 ? null : posts[index - 1].node
-
+    // Create pages for each recipe.
+    result.data.articles.edges.forEach(({ node }) => {
       createPage({
-        path: `blog${post.node.fields.slug}`,
-        component: blogPost,
+        path: node.fields.slug,
+        component: articleTemplate,
         context: {
-          slug: post.node.fields.slug,
-          previous,
-          next,
+          slug: node.fields.slug,
         },
       })
     })
-
-    return null
   })
-}
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-
-  if (node.internal.type === `Mdx`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
+  return null
 }

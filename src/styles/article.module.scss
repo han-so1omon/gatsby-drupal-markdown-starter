@@ -1,0 +1,99 @@
+@import './settings.scss';
+@import 'node_modules/foundation-sites/scss/foundation';
+
+$responsive-blog-post-highlight: $primary-color;
+$responsive-blog-post-vert-seperate: 4rem;
+$repo-link-color: #a65485;
+
+.responsive-blog-post {
+  margin-bottom: $responsive-blog-post-vert-seperate;
+
+  .repo-link {
+    color: $repo-link-color;
+    position: relative;
+    text-decoration: none;
+    display: inline;
+    &:before {
+      background-color: $repo-link-color;
+      content: '';
+      height: 1px;
+      position: absolute;
+      bottom: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.2s ease-in-out;
+      width: 100%;
+    }
+    &:hover {
+      &:before {
+        width: 0;
+      }
+    }
+  }
+
+  p {
+    color: $dark-gray;
+  }
+
+  code {
+    //background-color: darken($primary-color, 3%);
+    //font-size: 0.6rem;
+    //border: black dashed 1px;
+    border-left: 3px solid #5d7661;
+    //padding: 6px;
+    //page-break-inside: avoid;
+    //overflow: auth;
+    //display: block;
+    //word-wrap: break-word;
+    border-bottom-left-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+  }
+
+  .button {
+    padding: 0.85rem 3rem;
+    background: $responsive-blog-post-highlight;
+
+    &:hover {
+      background-color: darken($responsive-blog-post-highlight, 5%);
+      transition: color 0.3s ease-in;
+    }
+  }
+
+  .individual-post {
+    margin-bottom: $responsive-blog-post-vert-seperate;
+  }
+
+  h1 {
+    margin-bottom: 0.8rem;
+
+    &:hover {
+      text-decoration: underline;
+      transition: color 0.3s ease-in;
+    }
+
+    @media screen and (max-width: 39.9375em) {
+      font-size: 1.75rem;
+    }
+  }
+
+  h2 {
+    @media screen and (max-width: 39.9375em) {
+      font-size: 1.5rem;
+    }
+  }
+
+  h3 {
+    @media screen and (max-width: 39.9375em) {
+      font-size: 1.2rem;
+    }
+  }
+
+  img {
+    //margin-bottom: 1.0rem;
+  }
+
+  .date {
+    font-size: 0.8rem;
+    color: $dark-gray;
+  }
+}
