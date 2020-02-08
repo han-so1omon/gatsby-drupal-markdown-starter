@@ -1,1 +1,1 @@
-Notes for using Foundation-Sass
+this is a gatsby starter
