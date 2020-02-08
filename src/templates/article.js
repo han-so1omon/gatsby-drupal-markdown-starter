@@ -22,7 +22,6 @@ import "highlight.js/styles/codepen-embed.css"
 //var schema = merge(gh, {tagNames: ['math', 'mi']})
 
 import Layout from "../layouts"
-//import Container from "../components/container"
 import { rhythm } from "../utils/typography"
 import Button from "../components/button"
 import styles from "../styles/article.module.scss"

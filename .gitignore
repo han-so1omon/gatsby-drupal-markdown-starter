@@ -73,3 +73,5 @@ yarn-error.log
 *.bak
 
 *.lock
+
+static/ros2-gazebo-docker-network.png
