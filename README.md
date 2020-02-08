@@ -6,7 +6,7 @@ markdown format.
 
 [Blog](https://errcsool.com/blog/68)
 
-r Drupal Setup
+# Drupal Setup
 After starting Drupal, create a new text format for your markdown blog inputs.
 This should be a plaintext input format. Do not use the `Markdown` filter, as this
 converts markdown input into HTML. 
