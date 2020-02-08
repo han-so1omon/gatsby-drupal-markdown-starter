@@ -1,6 +1,6 @@
 # Gatsby Drupal Starter Blog with Markdown
 This is based off of the [Gatsby Drupal
-blogexample](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-drupal),
+blog example](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-drupal),
 with some modifications to allow bloggers to write articles in commonmark
 markdown format.
 
