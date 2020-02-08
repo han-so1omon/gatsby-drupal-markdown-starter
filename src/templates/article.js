@@ -15,6 +15,7 @@ import hl_cpp from "highlight.js/lib/languages/cpp"
 import hl_dockerfile from "highlight.js/lib/languages/dockerfile"
 import hl_js from "highlight.js/lib/languages/javascript"
 import hl_py from "highlight.js/lib/languages/python"
+import hl_scss from "highlight.js/lib/languages/scss"
 
 import "highlight.js/styles/codepen-embed.css"
 
@@ -32,7 +33,9 @@ var highlightSchema = {
     cpp: hl_cpp,
     dockerfile: hl_dockerfile,
     js: hl_js,
-    py: hl_py,}
+    py: hl_py,
+    scss: hl_scss,
+  }
 }
 
 var processor = unified()
